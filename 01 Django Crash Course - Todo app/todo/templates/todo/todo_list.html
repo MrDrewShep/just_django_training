@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Crash Course</title>
+</head>
+<body>
+    Howdy, returning a page from todo/templates/todo/todo_list.html
+
+    <p>
+        {% if request.user.is_authenticated %}
+            Hello known user
+        {% else %}
+            Hello anonymous user
+        {% endif %}
+    </p>
+
+    <p>
+        <a href="/create">Create a todo</a>
+    </p>
+
+    <ul>
+    {% for todo in todo_list %}
+        <li><a href="/{{ todo.id }}">{{ todo.name }}</a>, due {{ todo.due_date }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

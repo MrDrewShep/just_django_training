@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Crash Course</title>
+</head>
+<body>
+    Howdy, returning a page from todo/templates/todo...
+
+    <p>
+        {% if request.user.is_authenticated %}
+            Hello known user
+        {% else %}
+            Hello anonymous user
+        {% endif %}
+    </p>
+
+    <ul>
+    <li>The todo name is: {{ todo.name }}</li>
+    <li>The due date is: {{ todo.due_date }}</li>
+    </ul>
+</body>
+</html>
