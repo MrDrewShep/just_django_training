@@ -15,8 +15,11 @@
     * Url resolution goes through the list, so ordering of the url patterns does matter
 * If needed, create `forms.py` within the app directory
   * In the html template a Django form requires `{% csrf_token %}` be passed for security. #TODO: Find out more about this.
-  * Rather than build an html form by hand, you can lean on the class `django.forms.ModelForm` and pass that instance as context
   * In the html template you can call `{{ form }}` or `{{ form.as_p }}` which formats each form element with a `<p>` tag for readability
+  * Rather than build an html form by hand, you can lean on the class `django.forms.ModelForm` and pass that instance as context
+    * `form.is_valid()`
+    * `form.save()`
+    * `form.delete()`
 
 ### Two conventions for templates
 | Location for templates | settings.py | views.py |
@@ -49,3 +52,4 @@
 ### Other notes
 * `asgi.py` file is related to asynchronous programming
 * Ensure `DEBUG = False` before production
+* For styling help checkout https://getbootstrap.com/docs/4.3/getting-started/introduction/

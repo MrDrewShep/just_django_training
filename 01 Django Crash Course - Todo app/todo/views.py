@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Todo
 from .forms import TodoForm
 
+#TODO Could be made more DRY
+
 # Create your views here.
 # See below alternate ways of providing an HttpResponse
 # def todo_list(request):
@@ -50,3 +52,17 @@ def todo_create(request):
         return redirect('/')
     context = {"form": form}
     return render(request, "todo/todo_create.html", context)
+
+def todo_update(request, id):
+    todo = Todo.objects.get(id=id)
+    form = TodoForm(request.POST or None, instance=todo)
+    if form.is_valid():
+        form.save()
+        return redirect('/')
+    context = {"form": form}
+    return render(request, "todo/todo_update.html", context)
+
+def todo_delete(request, id):
+    todo = Todo.objects.get(id=id)
+    todo.delete()
+    return redirect('/')

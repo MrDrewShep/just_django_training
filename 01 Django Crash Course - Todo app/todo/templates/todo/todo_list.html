@@ -1,29 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Crash Course</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
     Howdy, returning a page from todo/templates/todo/todo_list.html
 
-    <p>
-        {% if request.user.is_authenticated %}
-            Hello known user
-        {% else %}
-            Hello anonymous user
-        {% endif %}
-    </p>
+    <div class="text-center">
+        <p>
+            {% if request.user.is_authenticated %}
+                Hello known user
+            {% else %}
+                Hello anonymous user
+            {% endif %}
+        </p>
+    
+        <p>
+            <a class="btn btn-primary" href="/create">Create a todo</a>
+        </p>
+    </div>
 
-    <p>
-        <a href="/create">Create a todo</a>
-    </p>
-
-    <ul>
+    <div class="col-4 offset-4">
     {% for todo in todo_list %}
-        <li><a href="/{{ todo.id }}">{{ todo.name }}</a>, due {{ todo.due_date }}</li>
+        <div class="card mt-3">
+            <div class="card-header">
+                <a href="/{{ todo.id }}"><h4>{{ todo.name }}</h4></a>
+            </div>
+            <div class="card-body">
+                <p>It's due on {{ todo.due_date }}</p>
+            </div>
+        </div>
     {% endfor %}
-    </ul>
-</body>
-</html>
+    </div>
+{% endblock %}

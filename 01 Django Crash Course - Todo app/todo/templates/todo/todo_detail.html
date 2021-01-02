@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Crash Course</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
     Howdy, returning a page from todo/templates/todo...
 
     <p>
@@ -16,9 +11,21 @@
         {% endif %}
     </p>
 
-    <ul>
-    <li>The todo name is: {{ todo.name }}</li>
-    <li>The due date is: {{ todo.due_date }}</li>
-    </ul>
-</body>
-</html>
+
+    <div class="col-4 offset-4">
+        <div class="card mt-3">
+            <div class="card-header">
+                <a href="/{{ todo.id }}"><h4>{{ todo.name }}</h4></a>
+            </div>
+            <div class="card-body">
+                <p>It's due on {{ todo.due_date }}</p>
+            </div>
+            <div class="card-footer">
+                <p><a href="/{{ todo.id }}/update/" class="btn btn-secondary">Update this todo</a></p>
+                <p><a href="/{{ todo.id }}/delete/" class="btn btn-secondary">Delete this todo</a></p>
+                <p><a href="/" class="btn btn-secondary">Return to list</a></p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}}
