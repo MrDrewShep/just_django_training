@@ -1,6 +1,7 @@
 ### Starting a project, and other commands
 * `django-admin startproject <nameofproject> .`
   * Failure to include the `.` will result in unwanted directory structure
+* Python gitignore file at: https://github.com/github/gitignore/blob/master/Python.gitignore
 * `python manage.py [command(s) here]`
   * `startapp <appname>` creates a new app
   * `runserver` launches a web server
