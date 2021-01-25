@@ -5,6 +5,8 @@
 * `python manage.py [command(s) here]`
   * `startapp <appname>` creates a new app
   * `runserver` launches a web server
+
+### When changing models, and once upon start of the project
   * `makemigrations` generates files inside the `migrations/` directory within each app
   * `migrate` applies those migration files
 
@@ -50,7 +52,24 @@
 * `django.test`
   * `TestCase` class
 
+### When releasing to production
+* Within `settings.py`:
+  * Ensure `DEBUG = False`
+  * Update `ALLOWED_HOSTS` with domains
+
+### Recommended VS Code extensions for Django
+  * Django, by Robert Solis (batisteo.vscode-django)
+  * Django Template, by bibhasdn (bibhasdn.django-html)
+  * SQLite, by alexcvzz (alexcvzz.vscode-sqlite)
+
 ### Other notes
 * `asgi.py` file is related to asynchronous programming
-* Ensure `DEBUG = False` before production
 * For styling help checkout https://getbootstrap.com/docs/4.3/getting-started/introduction/
+
+### Future reading
+  * https://docs.djangoproject.com/en/3.1/howto/static-files/
+  * https://docs.djangoproject.com/en/3.1/topics/files/
+  * https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/
+  * https://docs.djangoproject.com/en/3.1/ref/databases/
+  * Decimal v Float https://docs.python.org/3/library/decimal.html#module-decimal
+  
