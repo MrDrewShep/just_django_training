@@ -5,9 +5,11 @@
 * `python manage.py [command(s) here]`
   * `startapp <appname>` creates a new app
   * `runserver` launches a web server
+  * `shell` runs a shell with access to the Django project
+  * `createsuperuser`
 
 ### When changing models, and once upon start of the project
-  * `makemigrations` generates files inside the `migrations/` directory within each app
+  * `makemigrations <appName>` generates files inside the `migrations/` directory within the app
   * `migrate` applies those migration files
 
 ### For a new app within the project
@@ -51,6 +53,15 @@
   * `models` module
 * `django.test`
   * `TestCase` class
+* `django.contrib.auth.models` module
+  * `AbstractUser` class
+
+### Models
+* You can reference foreignkey models below your existing model (i.e. which have not yet been declared) by referencing the model in quotations. `mother = models.ForeignKey("Mom")`.
+* User model
+  * Setup `class User(AbstractUser):` even with just `pass` so that changes can be made in the future. Using `get_user_model()` will not allow for such flexibility in the future.
+  * Then tell the project that you've added a custom user model by adding to `settings.py` ... `AUTH_USER_MODEL = '<appname>.User'`
+* Model manager == `.objects`
 
 ### When releasing to production
 * Within `settings.py`:
@@ -67,6 +78,8 @@
 * For styling help checkout https://getbootstrap.com/docs/4.3/getting-started/introduction/
 
 ### Future reading
+  * `.get()` with a dunder passed inside
+  * https://docs.djangoproject.com/en/3.1/ref/models/fields/#field-types
   * https://docs.djangoproject.com/en/3.1/howto/static-files/
   * https://docs.djangoproject.com/en/3.1/topics/files/
   * https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/
