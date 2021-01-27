@@ -14,17 +14,28 @@
 
 ### For a new app within the project
 * Register the app by appending to `settings.py` file `INSTALLED_APPS` list
+
+### Urls, within a given app (not the project)
 * If needed, create `urls.py` within the app directory
-    * The app requires `app_name` to be defined, in it's `urls.py` file
+    * The app requires `app_name` to be defined, in it's own `urls.py` file (not the project's `urls.py`)
     * The app's url's can then be included using `include()` in the project's `urls.py`
     * Url resolution goes through the list, so ordering of the url patterns does matter
+
+### Forms
 * If needed, create `forms.py` within the app directory
+* Render Method #1, the manual way
+  * Create a class with fields that we want to see in the form
+  * Pass an instance as context
+* Render Method #2, `django.forms.ModelForm`
+  * Meta
+  * Pass an instance as context
+* Notes about the form:
   * In the html template a Django form requires `{% csrf_token %}` be passed for security. #TODO: Find out more about this.
   * In the html template you can call `{{ form }}` or `{{ form.as_p }}` which formats each form element with a `<p>` tag for readability
-  * Rather than build an html form by hand, you can lean on the class `django.forms.ModelForm` and pass that instance as context
-    * `form.is_valid()`
-    * `form.save()`
-    * `form.delete()`
+* `form.is_valid()`
+* `form.save()`
+* `form.delete()`
+* `form.cleaned_data`
 
 ### Two conventions for templates
 | Location for templates | settings.py | views.py |
@@ -37,24 +48,35 @@
   * Code looks like `{% for thing in things %}` and `{% endfor %}`
   * Object attributes look like `{{ todo.name }}`
 
-### `django` imports
-* `django`
-  * `forms` module
-* `django.urls`
-  * `path`
-* `django.shortcuts`
-  * `render` method
-  * `redirect` method
-* `django.http`
-  * `HttpResponse` class
-* `django.apps`
-  * `AppConfig` class
-* `django.db`
-  * `models` module
-* `django.test`
-  * `TestCase` class
-* `django.contrib.auth.models` module
-  * `AbstractUser` class
+### `django` imports to know
+* `models.py`
+  * `django.db`
+    * `models` module
+  * `django.contrib.auth.models` module
+    * `AbstractUser` class
+* `urls.py`
+  * `django.urls`
+    * `path`
+    * `include`
+* `views.py`
+  * `django.shortcuts`
+    * `render` method
+    * `redirect` method
+  * `django.http`
+    * `HttpResponse` class
+* `admin.py`
+  * `django.contrib` module
+    * `admin` module
+* `forms.py`
+  * `django`
+    * `forms` module
+    * `ModelForm` class
+* `apps.py`
+  * `django.apps`
+    * `AppConfig` class
+* `tests.py`
+  * `django.test`
+    * `TestCase` class
 
 ### Models
 * You can reference foreignkey models below your existing model (i.e. which have not yet been declared) by referencing the model in quotations. `mother = models.ForeignKey("Mom")`.
@@ -62,6 +84,13 @@
   * Setup `class User(AbstractUser):` even with just `pass` so that changes can be made in the future. Using `get_user_model()` will not allow for such flexibility in the future.
   * Then tell the project that you've added a custom user model by adding to `settings.py` ... `AUTH_USER_MODEL = '<appname>.User'`
 * Model manager == `.objects`
+
+### Views
+* View functions must pass `request` as the first parameter
+
+### Django admin
+* Register a model to appear in the admin in each app's `admin.py`
+* The model's `__str__` dictates how a record appears
 
 ### When releasing to production
 * Within `settings.py`:
