@@ -20,6 +20,9 @@
     * The app requires `app_name` to be defined, in it's own `urls.py` file (not the project's `urls.py`)
     * The app's url's can then be included using `include()` in the project's `urls.py`
     * Url resolution goes through the list, so ordering of the url patterns does matter
+* Use the `name='giveItAName'` argument to reference that url as such in templates
+  * `{% url '<appname>:<giveItAName>' %}`
+  * `{% url '<appname>:<giveItAName>' <instance>.<attribute> %}` to pass any additional arguments, e.g. `lead.pk`
 
 ### Forms
 * If needed, create `forms.py` within the app directory
@@ -42,6 +45,11 @@
 | --- | --- | --- |
 | `templates/` in the project directory | Add `os.path.join(BASE_DIR, "templates")` to `settings.py` file `TEMPLATES` > `DIRS` list | Reference `"todo_list.html"` |
 | `<appname>/templates/<appname>/` within each app directory | n/a | Reference `"<appname>/todo_list.html"` |
+
+* For extension of templates:
+  * From `templates` folder in the project directory, create `base.html`
+  * `{% extends "base.html" %}` and `{% block content %}` and an endblock tag
+* Include another file in the base template using `{% include "scripts.html" %}`
 
 ### Django Templating Syntax
   * `{{ request.user.is_authenticated }}` returns bool
@@ -104,7 +112,11 @@
 
 ### Other notes
 * `asgi.py` file is related to asynchronous programming
-* For styling help checkout https://getbootstrap.com/docs/4.3/getting-started/introduction/
+* For styling help checkout:
+  * https://tailwindcss.com/docs/installation
+  * https://github.com/aniftyco/awesome-tailwindcss
+  * https://tailblocks.cc/
+  * https://getbootstrap.com/docs/4.3/getting-started/introduction/
 
 ### Future reading
   * `.get()` with a dunder passed inside
