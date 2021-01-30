@@ -70,8 +70,12 @@
   * `django.shortcuts`
     * `render` method
     * `redirect` method
+    * `reverse` method
   * `django.http`
     * `HttpResponse` class
+  * `django.views.generic` module
+    * `TemplateViews` class
+    * `ListView`, `DetailView`, `UpdateView`, `CreateView`, `DeleteView` classes
 * `admin.py`
   * `django.contrib` module
     * `admin` module
@@ -95,6 +99,17 @@
 
 ### Views
 * View functions must pass `request` as the first parameter
+* Class Based Views
+  * Inherit from `TemplateView` class
+  * Define `template_name` = the template to point to
+  * In `urls.py`, in the `path()` import and call the class with `.as_view()`
+  * Where applicable, define `queryset` = the regular `<Class>.objects.<query>()`
+  * The key of the `context` passed into the template defaults to `object_list` but can be overridden in the class based view by defining `context_object_name`
+  * For CreateView
+    * No need to pass a `queryset` but instead pass a `form_class`
+    * `def get_success_url(self):` for whenever `form.save()` is successful, with either:
+      * `return redirect("<template>.html")`
+      * `return reverse("<appName>:<url namespace>")`
 
 ### Django admin
 * Register a model to appear in the admin in each app's `admin.py`
