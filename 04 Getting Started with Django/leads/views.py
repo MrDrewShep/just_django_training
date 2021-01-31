@@ -6,7 +6,7 @@ from django.views.generic import TemplateView, ListView, CreateView, \
 from .models import Lead, Agent
 from .forms import LeadForm, LeadModelForm
 
-# Create your views here.
+# Create your views here
 class LandingPageView(TemplateView):
     template_name = "landing.html"
 
