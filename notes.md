@@ -66,6 +66,10 @@
   * `django.urls`
     * `path`
     * `include`
+  * `django.conf`
+    * `settings`
+  * `django.conf.urls.static`
+    * `static`
 * `views.py`
   * `django.shortcuts`
     * `render` method
@@ -89,6 +93,9 @@
 * `tests.py`
   * `django.test`
     * `TestCase` class
+* Outbound mail
+  * `django.core.mail`
+    * `send_mail` method
 
 ### Models
 * You can reference foreignkey models below your existing model (i.e. which have not yet been declared) by referencing the model in quotations. `mother = models.ForeignKey("Mom")`.
@@ -110,6 +117,28 @@
     * `def get_success_url(self):` for whenever `form.save()` is successful, with either:
       * `return redirect("<template>.html")`
       * `return reverse("<appName>:<url namespace>")`
+
+### Static Files
+* In `settings.py`
+  * `STATIC_URL = '/static/'`
+  * `STATICFILES_DIRS = [ BASE_DIR / 'static']`
+  * `STATIC_ROOT = 'static_root'`
+* In the project's `urls.py`
+  * For production, include the path to the server of static files, e.g. S3
+  ```
+  if settings.DEBUG:
+      urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+  ```
+* From html templates
+  * `{% load static %}`
+  * e.g. `<link href="{% static '<filePathWithinStatic>' %} rel="stylesheet">`
+
+### Outbound Mail
+* In `settings.py` 
+  * In dev `EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'`
+  * In prod `EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'`
+
+
 
 ### Django admin
 * Register a model to appear in the admin in each app's `admin.py`
