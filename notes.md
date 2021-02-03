@@ -39,6 +39,7 @@
 * `form.save()`
 * `form.delete()`
 * `form.cleaned_data`
+* `User = get_user_model()` reads from `settings.AUTH_USER_MODEL`
 
 ### Two conventions for templates
 | Location for templates | settings.py | views.py |
@@ -70,6 +71,8 @@
     * `settings`
   * `django.conf.urls.static`
     * `static`
+  * `django.contrib.auth.views` module
+    * `LoginView` class
 * `views.py`
   * `django.shortcuts`
     * `render` method
@@ -80,6 +83,8 @@
   * `django.views.generic` module
     * `TemplateViews` class
     * `ListView`, `DetailView`, `UpdateView`, `CreateView`, `DeleteView` classes
+  * `django.contrib.auth.forms` module
+    * `UserCreationForm` class
 * `admin.py`
   * `django.contrib` module
     * `admin` module
@@ -87,6 +92,8 @@
   * `django`
     * `forms` module
     * `ModelForm` class
+  * `django.contrib.auth`
+    * `get_user_model` method
 * `apps.py`
   * `django.apps`
     * `AppConfig` class
@@ -133,12 +140,18 @@
   * `{% load static %}`
   * e.g. `<link href="{% static '<filePathWithinStatic>' %} rel="stylesheet">`
 
+### Authentication
+* Using Django's built in authentication
+  * Add `LoginView` to the project's `urls.py`
+  * `LoginView` requires that inside the project's `templates/` directory exist `registration/login.html`
+  * Optionally update `settings.py` with `LOGIN_REDIRECT_URL`
+  * Optionally use in templates `{% if request.user.is_authenticated %}`
+  * Add a class based view into the app for a signup page
+
 ### Outbound Mail
 * In `settings.py` 
   * In dev `EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'`
   * In prod `EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'`
-
-
 
 ### Django admin
 * Register a model to appear in the admin in each app's `admin.py`
